@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.simplepractice"
+        minSdk 22
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+    def hilt_version = "2.36"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    //to use Java annotation processing tool
+    annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
+    //to use Kotlin annotation processing tool (kapt)
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    //ViewModel Component for Injection with Hilt
+    def hilt_viewmodel = "1.0.0-alpha03"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel"
+    kapt "androidx.hilt:hilt-compiler:$hilt_viewmodel"
+
+    //Ktx library
+    def kotlin_ktx = "1.3.0"
+    def fragment_ktx = "1.3.5"
+    def activity_ktx = "1.2.3"
+    implementation "androidx.core:core-ktx:$kotlin_ktx"
+    implementation "androidx.fragment:fragment-ktx:$fragment_ktx"
+    implementation "androidx.activity:activity-ktx:$activity_ktx"
+
+    //Retrofit Library
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    //Rxjava2 with Retrofit
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    //Retrofit with GsonConverter
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //Logging interceptor
+    def logging_version = "4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_version"
+
+    //Timber
+    def timber_version = "5.0.0"
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    //Room Database Library:
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    //to use Java annotation processing tool
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    //to use Room with Rxjava2
+    implementation "androidx.room:room-rxjava2:$room_version"
+    //to use Kotlin annotation processing tool (kapt)
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+}
